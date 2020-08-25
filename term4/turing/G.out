@@ -1,0 +1,66 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+ 
+s 0 -> skip_to_compare Z >
+s 1 -> skip_to_compare O >
+s < -> final_check < >
+ 
+skip_to_compare 0 -> skip_to_compare 0 >
+skip_to_compare 1 -> skip_to_compare 1 >
+skip_to_compare < -> check_right_length < >
+ 
+check_right_length 0 -> check_left_length z < 
+check_right_length 1 -> check_left_length o < 
+check_right_length z -> check_right_length z > 
+check_right_length o -> check_right_length o > 
+check_right_length _ -> rj _ ^
+ 
+check_left_length z -> check_left_length z < 
+check_left_length o -> check_left_length o < 
+check_left_length < -> go_left0 < <
+ 
+go_left0 0 -> go_left0 0 <
+go_left0 1 -> go_left0 1 <
+go_left0 Z -> s Z >
+go_left0 O -> s O >
+ 
+final_check z -> final_check z >
+final_check o -> final_check o >
+final_check 1 -> ac _ ^
+final_check 0 -> ac _ ^
+final_check _ -> go_left1 _ <
+ 
+go_left1 z -> go_left1 z <
+go_left1 o -> go_left1 o <
+go_left1 Z -> go_left1 Z <
+go_left1 O -> go_left1 O <
+go_left1 < -> go_left1 < <
+go_left1 _ -> check_val _ >
+ 
+check_val O -> find1 # >
+check_val Z -> find0 # >
+check_val < -> rj _ ^
+ 
+find1 z -> rj _ ^
+find1 o -> go_left2 ? <
+find1 Z -> find1 Z >
+find1 O -> find1 O >
+find1 < -> find1 < >
+find1 ? -> find1 ? >
+find1 _ -> rj _ ^
+ 
+go_left2 Z -> go_left2 Z <
+go_left2 O -> go_left2 O <
+go_left2 < -> go_left2 < <
+go_left2 # -> check_val # >
+go_left2 ? -> go_left2 ? <
+ 
+find0 z -> go_left2 ? <
+find0 o -> ac _ ^
+find0 Z -> find0 Z >
+find0 O -> find0 O >
+find0 < -> find0 < >
+find0 ? -> find0 ? >
+find0 _ -> rj _ ^ 

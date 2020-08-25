@@ -1,0 +1,57 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+ 
+s 0 -> left 0 ^
+s 1 -> left 1 ^
+ 
+left 0 -> go_right Z >
+left 1 -> go_right O >
+ 
+left z -> findZ ? <
+left o -> findO ? <
+ 
+findZ Z -> findZ Z <
+findZ O -> findZ O <
+findZ ? -> findZ ? <
+findZ _ -> checkZ _ >
+findZ # -> checkZ # >
+ 
+checkZ Z -> go_right1 # >
+checkZ O -> rj + ^
+ 
+findO Z -> findO Z <
+findO O -> findO O <
+findO ? -> findO ? <
+findO _ -> checkO _ >
+findO # -> checkO # >
+ 
+checkO O -> go_right1 # >
+checkO Z -> rj + ^
+ 
+go_right1 Z -> go_right1 Z >
+go_right1 O -> go_right1 O >
+go_right1 # -> go_right1 # >
+go_right1 ? -> go_right1 ? >
+go_right1 _ -> ac + ^
+ 
+go_right1 z -> left z ^
+go_right1 o -> left o ^
+ 
+go_right 0 -> go_right 0 >
+go_right 1 -> go_right 1 >
+go_right _ -> right _ <
+go_right o -> right o <
+go_right z -> right z <
+ 
+right 0 -> go_left z <
+right 1 -> go_left o <
+ 
+go_left 0 -> go_left 0 <
+go_left 1 -> go_left 1 <
+go_left O -> left O >
+go_left Z -> left Z >
+ 
+right Z -> rj Z ^
+right O -> rj O ^

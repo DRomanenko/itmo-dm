@@ -1,0 +1,33 @@
+2
+ 
+S 0 _ -> S _ > 0 >
+S 1 _ -> S _ > 1 >
+S a _ -> conjuncture _ > _ <
+S o _ -> S _ > o >
+S ( _ -> S _ > ( >
+S ) _ -> S _ ^ _ <
+S _ 0 -> S _ ^ _ <
+S _ 1 -> close _ ^ _ <
+S _ a -> conjuncture 0 ^ _ <
+S _ o -> S _ ^ _ <
+S _ ( -> S _ > 0 >
+S _ _ -> finish _ ^ _ <
+ 
+finish _ 0 -> finish _ ^ _ <
+finish _ 1 -> AC 1 ^ _ ^
+finish _ o -> finish _ ^ _ <
+finish _ _ -> AC 0 ^ _ ^
+  
+conjuncture 0 0 -> S _ > 0 >
+conjuncture 0 1 -> S _ > 0 >
+conjuncture 1 0 -> S _ > 0 >
+conjuncture 1 1 -> S _ > 1 >
+conjuncture ( 0 -> conjuncture ( ^ 0 >
+conjuncture ( 1 -> conjuncture ( ^ 1 >
+conjuncture ( _ -> S _ > a >
+  
+close _ 0 -> close _ ^ _ <
+close _ 1 -> close _ ^ _ <
+close _ a -> conjuncture 1 ^ _ <
+close _ o -> close _ ^ _ <
+close _ ( -> S _ > 1 >
