@@ -1,0 +1,51 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+ 
+s 0 -> s 0 <
+s 1 -> s 1 <
+s 2 -> s 2 <
+s _ -> splitter | <
+ 
+splitter _ -> go_right 0 >
+ 
+go_right 0 -> go_right 0 >
+go_right 1 -> go_right 1 >
+go_right 2 -> go_right 2 >
+go_right | -> go_right | >
+go_right _ -> minus1 _ <
+ 
+minus1 0 -> minus1 2 <
+minus1 1 -> go_left 0 <
+minus1 2 -> go_left 1 <
+minus1 | -> go_left_finish | <
+ 
+go_left_finish 0 -> go_left_finish 0 <  
+go_left_finish 1 -> go_left_finish 1 < 
+go_left_finish 2 -> go_left_finish 2 < 
+go_left_finish | -> go_left_finish | <
+go_left_finish _ -> clear _ > 
+ 
+clear 0 -> clear 0 >
+clear 1 -> clear 1 >
+clear 2 -> clear _ >
+clear | -> clear _ >
+clear _ -> go_back _ >
+ 
+go_back 0 -> go_back_from_num 0 <
+go_back 1 -> go_back_from_num 1 <
+go_back _ -> go_back _ <
+ 
+go_left 0 -> go_left 0 <
+go_left 1 -> go_left 1 <
+go_left 2 -> go_left 2 <
+go_left | -> plus1 | <
+ 
+plus1 0 -> go_right 1 >
+plus1 1 -> plus1 0 <
+plus1 _ -> go_right 1 >
+ 
+go_back_from_num 0 -> go_back_from_num 0 <
+go_back_from_num 1 -> go_back_from_num 1 <
+go_back_from_num _ -> ac _ >

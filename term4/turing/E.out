@@ -1,0 +1,19 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+ 
+s ( -> s ( >
+s $ -> s $ >
+s ) -> find $ <
+s _ -> find_open _ <
+ 
+find ( -> s $ >
+find $ -> find $ <
+find ) -> rj + ^
+find _ -> rj + ^
+ 
+find_open ( -> rj + ^
+find_open $ -> find_open $ <
+find_open ) -> rj + ^
+find_open _ -> ac _ >

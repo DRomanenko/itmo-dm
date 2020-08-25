@@ -1,0 +1,22 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+ 
+s 0 -> s 2 >
+s 1 -> s 3 >
+s _ -> find _ <
+ 
+find 0 -> find 0 <
+find 1 -> find 1 <
+find 2 -> copy0 0 >
+find 3 -> copy1 1 >
+find _ -> ac _ >
+ 
+copy0 0 -> copy0 0 >
+copy0 1 -> copy0 1 >
+copy0 _ -> find 0 <
+ 
+copy1 0 -> copy1 0 >
+copy1 1 -> copy1 1 >
+copy1 _ -> find 1 <
